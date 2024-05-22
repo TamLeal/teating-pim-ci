@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import time
+import os
 
 # Aumentar o limite de renderização do Styler do Pandas
 pd.set_option("styler.render.max_elements", 1705232)
 
 st.set_page_config(layout="wide")
 
+# Definir o caminho do arquivo auxiliar
+project_folder = os.path.dirname(__file__)  # Diretório do script atual
+auxiliary_file_path = os.path.join(project_folder, 'auxiliar_file.csv')
 
 def filter_columns(data, filter_data):
     """
@@ -114,10 +118,9 @@ def main():
     with col2:
         ci_file = st.file_uploader("Select CI CSV file", type="csv")
 
-    st.sidebar.subheader("Attributes to Include/Exclude", divider="green")
-    filter_file = st.sidebar.file_uploader("Select Filter CSV file", type="csv")
+    st.sidebar.subheader("PIM-CI Checker Tool", divider="green")
 
-    if pim_file is not None and ci_file is not None and filter_file is not None:
+    if pim_file is not None and ci_file is not None:
         with st.spinner('Loading PIM data...'):
             pim_data = load_data(pim_file)
 
@@ -125,7 +128,7 @@ def main():
             ci_data = load_data(ci_file)
 
         with st.spinner('Loading Filter data...'):
-            filter_data = pd.read_csv(filter_file)
+            filter_data = pd.read_csv(auxiliary_file_path)
 
         # Apply column filters
         pim_data = filter_columns(pim_data, filter_data)
