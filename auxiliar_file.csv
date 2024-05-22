@@ -1,0 +1,251 @@
+Attribute,Include/Exclude
+Product Categories,Include
+Sample Details,Exclude
+Year of Introduction,Include
+Country of Origin,Include
+Material Origin,Exclude
+State of Origin,Include
+Zip Code of Origin,Exclude
+Availability,Include
+Ship Internationally,Include
+Lead Time,Include
+Minimum Units,Include
+Order Increments,Include
+Warranty,Include
+City of Origin,Exclude
+Stock Code,Include
+Construction,Include
+Poured Resin Flooring Type,Exclude
+Opacity,Include
+Opacity Level / Openness,Include
+Solar Properties,Exclude
+Base Cloth / Material,Exclude
+Content,Include
+Wallcovering Classification,Include
+Branded Content,Include
+Leather Type,Include
+Tannage,Exclude
+Carpet Fiber Type,Include
+Dye Method (Filter),Include
+Surface Sheen,Exclude
+Surface Texture,Include
+Finish,Include
+Treatment,Include
+Branded Finish,Include
+Backing,Include
+Custom Finishes,Exclude
+Custom Capabilities,Include
+Wood Figuring,Exclude
+Wood Grade,Include
+Wood Species (Filter),Include
+Wood Cut,Exclude
+Pattern Repeat,Include
+Railroaded Pattern Repeat,Exclude
+Direction / Orientation,Exclude
+Stone Cut,Exclude
+Plate Size / Repeat,Exclude
+Lamping,Include
+Panel Skin Content,Exclude
+Abrasion,Include
+ACT,Include
+Acoustics,Include
+Ada,Include
+Adhesion Of Coating,Exclude
+Antimicrobial Testing,Include
+Bond Strength,Exclude
+Chemical Resistance (Text),Include
+Classification,Include
+Color Stability from Heat,Exclude
+Colorfastness to Humidity,Exclude
+Colorfastness to Water (Text),Exclude
+Compression,Exclude
+Crazing Resistance,Exclude
+Crocking,Exclude
+Dimensional Stability,Exclude
+Electrical Resistance,Exclude
+Electrostatic Propensity,Exclude
+Elongation,Exclude
+Flexural Strength,Exclude
+Flammability,Include
+Hardness,Include
+Hydrolysis Resistance,Exclude
+Impact Resistance,Exclude
+Light Blocking,Exclude
+Light Reflectance,Exclude
+Lightfastness,Include
+Performance,Include
+Wear Layer Thickness,Include
+Edge / End,Include
+Profile,Exclude
+Capacity,Include
+Shade Variation,Include
+Maintenance,Include
+Laundering Test,Exclude
+Antimicrobial Note,Exclude
+Stain Type (Text),Exclude
+Industry Sector,Include
+Durability,Include
+Application,Include
+Usage,Include
+Manufacturer Notes,Include
+Installation,Include
+Installation Direction,Include
+Affixing System,Include
+Hanging Information,Include
+Performance Features,Include
+Suitable Substrates,Exclude
+Recommended Adhesive,Exclude
+Diversity Classification,Exclude
+Abrasion / Wear Resistance,Include
+Panel Substrate Content,Exclude
+Format,Include
+Shape,Include
+Bed Size,Include
+Size,Include
+Width,Include
+Length,Include
+Tile Sheet Dimensions,Include
+Nominal Size,Exclude
+Hide Configuration,Include
+Hide Size,Exclude
+Tile Type,Include
+Tile Uniformity,Include
+Recommended Grout,Include
+Grout Width,Include
+Overall Thickness,Include
+Total Weight,Include
+Density,Exclude
+Diameter,Include
+Carpet Pile Height,Include
+Pile / Face Weight,Include
+Surface Pile Density,Include
+Yarn / Tuft Details,Include
+Series Name,Include
+Collection Name,Include
+Designer Name,Include
+Sample Note,Include
+Description,Include
+Abrasion / Wear Resistance (Filter),Include
+Certificates & Standards,Exclude
+Commercial & Residential,Include
+Construction (Filter),Include
+Content for Filtering,Include
+CSI MasterFormat,Exclude
+Dye Method,Exclude
+Environmental Benefits Filter,Exclude
+Flammability (Filter),Include
+Indoor & Outdoor,Include
+Keywords,Exclude
+Product Details,Include
+Color Name,Include
+Color Number,Include
+Material URL,Exclude
+Price Range,Include
+Retail Price,Exclude
+Trade Price,Exclude
+Price (Hidden),Include
+California Prop 65,Include
+Manufacturer,Exclude
+Manufacturer SKU,Include
+Product Type,Exclude
+Pilling,Exclude
+Seam Slippage,Exclude
+Slip Resistance,Include
+Snagging Resistance,Exclude
+Stain Resistance,Include
+Stretch,Exclude
+Tear Strength,Exclude
+Tensile Strength,Exclude
+Water Absorption,Include
+Water Resistance,Exclude
+Weather Resistance,Include
+Environmental Benefits,Exclude
+Certificates & Standards (Filter),Exclude
+Post-Industrial Recycled Content Percentage,Exclude
+Post-Consumer Recycled Content Percentage,Exclude
+Leed,Include
+Emissions,Include
+Recycling Notes,Exclude
+List of Contents / Ingredients,Exclude
+Social Impacts,Exclude
+Wellness Benefits,Exclude
+Chemical List,Exclude
+Light Reflectance Value,Include
+LRV Filter,Include
+Shades,Include
+Paint Collection Name,Include
+Brand Name,Include
+Product Name,Include
+Material Bank SKU,Include
+URL Key,Exclude
+Batch Number,Exclude
+Product Websites,Exclude
+Parent Account,Exclude
+Serial SKU,Exclude
+Attribute Set Code,Include
+Visibility,Exclude
+Enable Product,Exclude
+Hide From Product View,Exclude
+Retired SKU,Include
+Stealth SKU,Exclude
+Material Bank Lifecycle Status,Include
+Inventory Disposition,Include
+Global Warming Potential (GWP),Include
+Social Equity Impact,Include
+Human Health Impact,Include
+Climate Impact,Include
+Family Id,Include
+Product Name,Include
+Score,Exclude
+Swatch Image,Exclude
+Install 01,Exclude
+Install 02,Exclude
+Install 03,Exclude
+Install 04,Exclude
+Install 05,Exclude
+Install 06,Exclude
+Install 07,Exclude
+Install 08,Exclude
+Install 09,Exclude
+Install 10,Exclude
+PDF 01,Exclude
+PDF 02,Exclude
+PDF 03,Exclude
+PDF 04,Exclude
+Retail Price:,Exclude
+Trade Price:,Exclude
+Products,Exclude
+Product Features,Exclude
+Tannage (Filter),Exclude
+Wood Cut (Filter),Exclude
+Depth,Exclude
+PDF 05,Exclude
+PDF 06,Exclude
+PDF 07,Exclude
+PDF 08,Exclude
+PDF 09,Exclude
+PDF 10,Exclude
+Sample SKU,Exclude
+Associated Samples,Exclude
+Set as New SKU,Exclude
+Item Type,Exclude
+Fulfillment,Exclude
+Organizational Commitments,Exclude
+Sustainability Action Plan,Exclude
+End-of-Life Options,Exclude
+Environmental Product Declaration,Exclude
+Ingredient Disclosure,Exclude
+RoHS Compliance,Exclude
+LCA Optimization Plan,Exclude
+Material Health Certifications,Exclude
+Disclosure Level,Exclude
+FSC Certified Wood,Exclude
+Multi Attribute Certification,Exclude
+Third-Party Bio-Based Certification,Exclude
+Chemicals of Concern,Exclude
+VOC Emissions Testing Certificate ,Exclude
+Electronic Components in Product,Exclude
+75% of Ingredients Disclosed,Exclude
+GWP Functional Unit,Exclude
+Channels,Exclude
+VOC Emissions Testing Methodology ,Exclude
