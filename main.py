@@ -3,7 +3,6 @@ import pandas as pd
 import time
 import os
 
-pd.set_option("styler.render.max_elements", 1705232)
 st.set_page_config(layout="wide")
 
 project_folder = os.path.dirname(__file__)  # Diretório do script atual
@@ -46,6 +45,18 @@ def compare_datasets(pim_data, ci_data):
         sku_discrepancies = discrepant_data[discrepant_data['Material Bank SKU'] == sku]
         pim_discrepancy = sku_discrepancies[sku_discrepancies['source'] == 'PIM'].reset_index(drop=True)
         ci_discrepancy = sku_discrepancies[sku_discrepancies['source'] == 'CI'].reset_index(drop=True)
+
+        # Determine differing attributes
+        differing_attributes = []
+        for col in pim_discrepancy.columns:
+            if col not in ['Material Bank SKU', 'source'] and not pim_discrepancy[col].equals(ci_discrepancy[col]):
+                differing_attributes.append(col)
+
+        # Add differing attributes as a new column
+        differing_attributes_str = "|".join(differing_attributes)
+        pim_discrepancy['differing_attributes'] = differing_attributes_str
+        ci_discrepancy['differing_attributes'] = differing_attributes_str
+
         paired_discrepancies.append(pim_discrepancy)
         paired_discrepancies.append(ci_discrepancy)
         paired_discrepancies.append(pd.DataFrame())  # Adds an empty row between pairs
@@ -143,6 +154,10 @@ def main():
             paired_discrepancies_df, num_discrepant, num_identical, unique_skus, processing_time = compare_datasets(
                 pim_data, ci_data)
 
+        # Set dynamic max_elements based on data size
+        num_elements = paired_discrepancies_df.size
+        pd.set_option("styler.render.max_elements", num_elements)
+
         with stat_col1:
             st.subheader("Data Upload Statistics", divider='blue')
             st.write(f"Number of filled rows in PIM dataset: {num_filled_pim}")
@@ -161,8 +176,11 @@ def main():
 
             # Before exporting, ensure "Material Bank SKU" and "source" are the first columns
             if "Material Bank SKU" in paired_discrepancies_df.columns and "source" in paired_discrepancies_df.columns:
-                columns = ["Material Bank SKU", "source"] + [col for col in paired_discrepancies_df.columns if
-                                                             col not in ["Material Bank SKU", "source"]]
+                columns = ["Material Bank SKU", "source", "differing_attributes"] + [col for col in
+                                                                                     paired_discrepancies_df.columns if
+                                                                                     col not in ["Material Bank SKU",
+                                                                                                 "source",
+                                                                                                 "differing_attributes"]]
                 paired_discrepancies_df = paired_discrepancies_df[columns]
 
             csv_data = paired_discrepancies_df.to_csv(index=False).encode('utf-8')
