@@ -3,25 +3,22 @@ import pandas as pd
 import time
 import os
 
-# Aumentar o limite de renderização do Styler do Pandas
 pd.set_option("styler.render.max_elements", 1705232)
-
 st.set_page_config(layout="wide")
 
-# Definir o caminho do arquivo auxiliar
 project_folder = os.path.dirname(__file__)  # Diretório do script atual
 auxiliary_file_path = os.path.join(project_folder, 'auxiliar_file.csv')
 
-def filter_columns(data, filter_data):
+
+def filter_columns(data, filter_data, original_columns):
     """
-    Exclude columns based on the 'Include/Exclude' value from the auxiliary spreadsheet.
+    Include columns based on the 'Include/Exclude' value from the auxiliary spreadsheet.
+    Preserves the original casing of the column names.
     """
-    # Normalize column names to lowercase
-    data.columns = data.columns.str.lower()
     filter_data['Attribute'] = filter_data['Attribute'].str.lower()
-    exclude_columns = filter_data[filter_data['Include/Exclude'].str.lower() == 'exclude']['Attribute'].tolist()
-    filtered_data = data.drop(columns=exclude_columns, errors='ignore')
-    return filtered_data
+    include_columns = filter_data[filter_data['Include/Exclude'].str.lower() == 'include']['Attribute'].tolist()
+    included_columns = [col for col in original_columns if col.lower() in include_columns]
+    return data[included_columns]
 
 
 def compare_datasets(pim_data, ci_data):
@@ -35,7 +32,7 @@ def compare_datasets(pim_data, ci_data):
     combined_data = pd.concat([pim_data, ci_data], ignore_index=True)
 
     # Group by Material Bank SKU and filter groups with more than one element
-    differences = combined_data.groupby('material bank sku').filter(lambda x: len(x) > 1)
+    differences = combined_data.groupby('Material Bank SKU').filter(lambda x: len(x) > 1)
 
     # Find rows that differ within the same group (same Material Bank SKU)
     discrepant_data = differences.drop_duplicates(subset=differences.columns.difference(['source']), keep=False)
@@ -45,8 +42,8 @@ def compare_datasets(pim_data, ci_data):
 
     # Organize discrepancies into pairs
     paired_discrepancies = []
-    for sku in discrepant_data['material bank sku'].unique():
-        sku_discrepancies = discrepant_data[discrepant_data['material bank sku'] == sku]
+    for sku in discrepant_data['Material Bank SKU'].unique():
+        sku_discrepancies = discrepant_data[discrepant_data['Material Bank SKU'] == sku]
         pim_discrepancy = sku_discrepancies[sku_discrepancies['source'] == 'PIM'].reset_index(drop=True)
         ci_discrepancy = sku_discrepancies[sku_discrepancies['source'] == 'CI'].reset_index(drop=True)
         paired_discrepancies.append(pim_discrepancy)
@@ -59,8 +56,8 @@ def compare_datasets(pim_data, ci_data):
         paired_discrepancies_df = pd.DataFrame()
 
     # Identificar SKUs exclusivos de cada dataset
-    pim_skus = set(pim_data['material bank sku'])
-    ci_skus = set(ci_data['material bank sku'])
+    pim_skus = set(pim_data['Material Bank SKU'])
+    ci_skus = set(ci_data['Material Bank SKU'])
 
     pim_unique_skus = pim_skus - ci_skus
     ci_unique_skus = ci_skus - pim_skus
@@ -107,7 +104,6 @@ def download_csv_fragment(csv_data):
 
 def main():
     icon()
-
     st.markdown("#")
 
     col1, col2 = st.columns(2)
@@ -123,16 +119,18 @@ def main():
     if pim_file is not None and ci_file is not None:
         with st.spinner('Loading PIM data...'):
             pim_data = load_data(pim_file)
+            pim_columns = pim_data.columns.tolist()  # Save original column names
 
         with st.spinner('Loading CI data...'):
             ci_data = load_data(ci_file)
+            ci_columns = ci_data.columns.tolist()  # Save original column names
 
         with st.spinner('Loading Filter data...'):
             filter_data = pd.read_csv(auxiliary_file_path)
 
         # Apply column filters
-        pim_data = filter_columns(pim_data, filter_data)
-        ci_data = filter_columns(ci_data, filter_data)
+        pim_data = filter_columns(pim_data, filter_data, pim_columns)
+        ci_data = filter_columns(ci_data, filter_data, ci_columns)
 
         # Contar e exibir o número de linhas preenchidas para cada dataset
         num_filled_pim = pim_data.dropna(how='all').shape[0]
@@ -160,6 +158,13 @@ def main():
         with stat_col1:
             st.markdown("##")
             st.subheader("Download Data")
+
+            # Before exporting, ensure "Material Bank SKU" and "source" are the first columns
+            if "Material Bank SKU" in paired_discrepancies_df.columns and "source" in paired_discrepancies_df.columns:
+                columns = ["Material Bank SKU", "source"] + [col for col in paired_discrepancies_df.columns if
+                                                             col not in ["Material Bank SKU", "source"]]
+                paired_discrepancies_df = paired_discrepancies_df[columns]
+
             csv_data = paired_discrepancies_df.to_csv(index=False).encode('utf-8')
             download_csv_fragment(csv_data)
 
